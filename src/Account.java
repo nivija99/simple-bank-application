@@ -1,3 +1,5 @@
+import java.util.HashMap;
+
 public class Account {
     private Long accountNo;
     private String accountHolder;
@@ -11,6 +13,15 @@ public class Account {
 
     public Long getAccountNo() {
         return accountNo;
+    }
+
+    @Override
+    public String toString() {
+        return "Account{" +
+                "accountNo=" + accountNo +
+                ", accountHolder='" + accountHolder + '\'' +
+                ", balance=" + balance +
+                '}';
     }
 
     public String getAccountHolder() {
@@ -40,6 +51,14 @@ public class Account {
         } else {
             this.balance = this.balance - amount;
             System.out.println("Amount is withdraw successfully!!!");
+        }
+    }
+
+    public void searchByAccountNo(HashMap accounts, Long accountNo) throws AccountNotFoundException{
+        if(accounts.containsKey(accountNo)){
+            System.out.println(accounts.get(accountNo).toString());
+        } else {
+            throw new AccountNotFoundException("There is no account for the given account No :" + accountNo);
         }
     }
 
