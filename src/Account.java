@@ -36,33 +36,7 @@ public class Account {
         this.balance = balance;
     }
 
-    public void depositMoney(double amount){
-        if(amount <= 0){
-            System.out.println("Kindly enter the amount above 0");
-        } else {
-            this.balance = this.balance + amount;
-            System.out.println("Balance after deposit is "+ this.balance);
-        }
-    }
-
-    public void withdrawMoney(double amount){
-        if(amount > this.balance){
-            System.out.println("You doesn't have enough money in your account. Kindly check balance before withdraw!!");
-        } else {
-            this.balance = this.balance - amount;
-            System.out.println("Amount is withdraw successfully!!!");
-        }
-    }
-
-    public void searchByAccountNo(HashMap accounts, Long accountNo) throws AccountNotFoundException{
-        if(accounts.containsKey(accountNo)){
-            System.out.println(accounts.get(accountNo).toString());
-        } else {
-            throw new AccountNotFoundException("There is no account for the given account No :" + accountNo);
-        }
-    }
-
-    public void checkBalance(){
-        System.out.println("Balance amount in your account is "+this.balance);
+    public void calculateInterest(double balance){
+        System.out.println("Interest is calculated");
     }
 }
