@@ -1,30 +1,46 @@
 import javax.lang.model.util.SimpleAnnotationValueVisitor14;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        Account account1 = new Account(1234567L, "Joseph", 0.0);
-        Account account2 = new Account(1234568L, "John", 1000);
-        Account account3 = new Account(1234569L, "Stella", 100);
-        Account account4 = new Account(1234560L, "Merry", 500);
-        Account account5 = new Account(1234561L, "Veena", 2000.70);
 
-        HashMap<Long, Account> accounts = new HashMap<>();
-        accounts.put(account1.getAccountNo(), account1);
-        accounts.put(account2.getAccountNo(), account2);
-        accounts.put(account3.getAccountNo(), account3);
-        accounts.put(account4.getAccountNo(), account4);
-        accounts.put(account5.getAccountNo(), account5);
+        File file = new File("resource/myAccounts.txt");
+        try {
+            if (file.createNewFile()) {
+                System.out.println("File is created");
+            } else {
+                System.out.println("File is already there");
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        BanckAccount account = new SavingAccount(1234567L,"Nivija",2000);
+        BanckAccount account1 = new CurrentAccount(987654L,"Nivi",20000.00);
 
-        SavingAccount sAcc = new SavingAccount(1234567L, "Joseph", 1000);
-        sAcc.calculateInterest(1000);
+        try(FileWriter writer = new FileWriter("resource/myAccounts.txt",true)){
+            writer.write(account.toString());
+            writer.write(account.toString());
+            writer.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
-        currentAccount cAcc = new currentAccount(1234561L, "Veena", 500);
         try{
-            cAcc.calculateInterest(5000);
-        } catch (LowBalanceException e) {
-            throw new RuntimeException("Low Balance !!!");
+            Scanner reader = new Scanner(new File("resource/myAccounts.txt"));
+            //System.out.println(reader.next());
+            while (reader.hasNext()){
+                String line = reader.nextLine();
+                System.out.println(line);
+            }
+            reader.close();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
 
     }

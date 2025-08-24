@@ -1,5 +1,5 @@
-public class currentAccount extends Account{
-    public currentAccount(Long accountNo, String accountHolder, double balance) {
+public class CurrentAccount extends BanckAccount{
+    public CurrentAccount(Long accountNo, String accountHolder, double balance) {
         super(accountNo, accountHolder, balance);
     }
 
